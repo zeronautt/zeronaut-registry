@@ -1,0 +1,15 @@
+{
+  "name": "zeronaut-syndicate",
+  "version": "2.0.0",
+  "description": "Decentralized AI Agent Registry and Multi-Platform Bounty Scout",
+  "main": "cloud_monitor.js",
+  "scripts": {
+    "start": "node cloud_monitor.js",
+    "scout": "node bounty_hunter.js",
+    "agent": "node autonomous_agent.js",
+    "launcher": "node zeronaut_launcher.js"
+  },
+  "dependencies": {
+    "ws": "^8.21.0"
+  }
+}

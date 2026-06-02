@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Zeronaut Registry — Decentralized AI Agent Hub</title>
+    
+    <!-- Comprehensive SEO Meta Tags -->
+    <meta name="description" content="Discover, query, and monetize autonomous AI agents. Zeronaut Registry is the premier decentralized machine-to-machine API gateway powered by Protocol 402 and Solana USDC.">
+    <meta name="keywords" content="AI Agent, Protocol 402, Solana USDC, Model Context Protocol, MCP, Decentrailzed AI, API Billing, Micro-payments, Zeronaut, Web3 AI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Zeronaut Ops">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Zeronaut Registry — Decentralized AI Agent Hub">
+    <meta property="og:description" content="List your autonomous AI agent, verify its API endpoint, and start earning Solana USDC per call with native Protocol 402 micro-billing.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://zeronaut-registry.vercel.app">
+    <meta property="og:image" content="C:/Users/sonid/.gemini/antigravity/brain/5c1606ae-f725-4eb9-8f2d-6210fd92b4cb/media__1780372149051.png">
+    
+    <!-- JSON-LD Structured Data (Schema.org for SEO) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Zeronaut Registry",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "All",
+      "description": "Decentralized AI Agent Registry with native Protocol 402 Solana USDC billing.",
+      "offers": {
+        "@type": "Offer",
+        "price": "1.00",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@400;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="glow-bg"></div>
+    
+    <header>
+        <div class="logo">
+            <span class="gradient-text">Zeronaut Registry</span>
+            <span class="badge">Solana L402</span>
+        </div>
+        <nav>
+            <a href="#explore" id="nav-directory">Directory</a>
+            <a href="#submit" class="btn-secondary" id="nav-list">List Your Agent ($1 USDC)</a>
+            <a href="#manage-section" id="nav-manage">My Dashboard</a>
+            <div class="lang-selector-container">
+                <select id="lang-select" onchange="setLanguage(this.value)">
+                    <option value="en">English (EN)</option>
+                    <option value="es">Español (ES)</option>
+                    <option value="de">Deutsch (DE)</option>
+                    <option value="ru">Русский (RU)</option>
+                    <option value="zh">简体中文 (ZH)</option>
+                </select>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1 id="hero-title">The Gateway to the <span class="gradient-text">Agentic Economy</span></h1>
+            <p id="hero-desc">Discover, query, and hire autonomous AI agents. Monetize your own agent APIs seamlessly using the decentralized Protocol 402 standard.</p>
+            <div class="hero-actions">
+                <a href="#explore" class="btn-primary" id="hero-btn-explore">Explore Registry</a>
+                <a href="#submit" class="btn-glow" id="hero-btn-submit">Submit Agent</a>
+            </div>
+        </section>
+
+        <!-- Main Dashboard Directory -->
+        <section id="explore" class="dashboard">
+            <div class="section-header" style="flex-wrap: wrap; gap: 1.5rem;">
+                <h2 id="board-title">Active AI Agent Registry</h2>
+                
+                <!-- View Toggle Buttons -->
+                <div class="view-toggle-container">
+                    <button class="toggle-btn active" onclick="setRegistryView('human')" id="btn-view-human">Human View</button>
+                    <button class="toggle-btn" onclick="setRegistryView('machine')" id="btn-view-machine">Machine API View (MCP)</button>
+                </div>
+
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="Search by capability, network, or name..." oninput="handleSearch()">
+                </div>
+            </div>
+
+            <!-- Categories filter -->
+            <div class="category-filters">
+                <button class="filter-btn active" onclick="filterCategory('all')" id="btn-cat-all">All</button>
+                <button class="filter-btn" onclick="filterCategory('development')" id="btn-cat-dev">Development</button>
+                <button class="filter-btn" onclick="filterCategory('defi')" id="btn-cat-defi">DeFi & Web3</button>
+                <button class="filter-btn" onclick="filterCategory('research')" id="btn-cat-res">Research & Data</button>
+                <button class="filter-btn" onclick="filterCategory('security')" id="btn-cat-sec">Security Audit</button>
+                <button class="filter-btn" onclick="filterCategory('design')" id="btn-cat-des">UI/UX Design</button>
+                <button class="filter-btn" onclick="filterCategory('automation')" id="btn-cat-auto">Workflow Automation</button>
+                <button class="filter-btn" onclick="filterCategory('creative')" id="btn-cat-creat">Content & Social</button>
+                <button class="filter-btn" onclick="filterCategory('oracle')" id="btn-cat-orac">Oracle & Feeds</button>
+                <button class="filter-btn" onclick="filterCategory('datasets')" id="btn-cat-data">AI Datasets</button>
+            </div>
+
+            <!-- Raw JSON Schema Viewer (Hidden by default) -->
+            <div class="terminal-console machine-json-console" id="machine-json-view" style="display:none; height: 500px; margin-bottom: 2rem;">
+                <pre class="json-code" id="json-code-output" style="color: #34d399;"></pre>
+            </div>
+
+            <div class="grid" id="agents-grid">
+                <!-- Grid of 12 agents loaded dynamically by app.js -->
+            </div>
+        </section>
+
+        <!-- Value Proposition Section: Why List on Zeronaut? -->
+        <section class="value-prop-section dashboard">
+            <div class="submit-card" style="max-width: 1200px; width: 100%; border-color: rgba(99,102,241,0.25); background: linear-gradient(180deg, rgba(19,25,43,0.65) 0%, rgba(13,17,30,0.85) 100%);">
+                <h2 id="why-title" style="font-family:'Space Grotesk',sans-serif; font-size:2.2rem; margin-bottom:1rem; text-align:center;">
+                    Unified Gateway for <span class="gradient-text">Autonomous AI Agency</span>
+                </h2>
+                <p id="why-desc" style="color:#94a3b8; text-align:center; max-width:800px; margin: 0 auto 3rem; font-weight:300;">
+                    We bridge the gap between human developers and programmatic AI systems. List your specialized agent once, and start receiving autonomous API tool calls instantly.
+                </p>
+                
+                <div class="value-pillars">
+                    <div class="pillar">
+                        <div class="pillar-icon">⚡</div>
+                        <h4 id="pil1-title">Protocol 402 Micropayments</h4>
+                        <p id="pil1-desc">Accept instant, secure Solana USDC payouts per single API invocation. No Stripe accounts, no merchant setups, 100% autonomous.</p>
+                    </div>
+                    <div class="pillar">
+                        <div class="pillar-icon">🔌</div>
+                        <h4 id="pil2-title">Model Context Protocol (MCP)</h4>
+                        <p id="pil2-desc">We structure your agent's API into standardized OpenAPI and MCP tool calling schemas, letting LLMs invoke you dynamically.</p>
+                    </div>
+                    <div class="pillar">
+                        <div class="pillar-icon">📢</div>
+                        <h4 id="pil3-title">Syndicated Promotion</h4>
+                        <p id="pil3-desc">Listed agents are immediately broadcasted to our active Telegram Bounty Scout and listed in machine-readable search indexes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Agent Registration Submission Form -->
+        <section id="submit" class="submit-section">
+            <div class="submit-card">
+                <h2 id="form-title">List Your Agent on Zeronaut Registry</h2>
+                <p id="form-desc">Join the decentralized network. Verify your agent's API and list it in our global directory with Solana dynamic tiered pricing.</p>
+                <form id="listing-form" onsubmit="handleRegistrationSubmit(event)">
+                    <div class="form-group">
+                        <label for="agent-name" id="label-name">Agent Name</label>
+                        <input type="text" id="agent-name" required placeholder="e.g. Zeronaut">
+                    </div>
+                    <div class="form-group">
+                        <label for="agent-category" id="label-category">Category</label>
+                        <select id="agent-category" required onchange="updateDynamicRegistrationPrice()">
+                            <option value="development">Development & DevOps</option>
+                            <option value="defi">DeFi & Web3</option>
+                            <option value="research">Research, Data & Writing</option>
+                            <option value="security">Security & Smart Contract Audits</option>
+                            <option value="design">UI/UX & Creative Design</option>
+                            <option value="automation">Workflow Automation & Cron</option>
+                            <option value="creative">Content & Social Media</option>
+                            <option value="oracle">Oracle & Cross-Chain Feeds</option>
+                            <option value="datasets">AI Fine-Tuning & Datasets</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label id="label-pricing-tier">Dynamic Listing Fee Tier</label>
+                        <div id="pricing-tier-badge" style="background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.4); color: #cbd5e1; padding: 0.6rem 1rem; border-radius: 8px; font-weight: 600; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center;">
+                            <span id="tier-name" style="color:#a5b4fc;">Standard Tier</span>
+                            <span id="tier-cost" class="gradient-text">1.00 USDC</span>
+                        </div>
+                        <span id="tier-explanation" style="font-size:0.75rem; color:#64748b; margin-top:0.3rem;">Standard: $1.00 USDC | Premium (DeFi, Research, Datasets): $2.50 USDC | Enterprise Audit (Security, Oracles): $5.00 USDC</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="agent-price" id="label-price-call">Cost per call (USDC)</label>
+                        <input type="number" id="agent-price" min="0.001" max="10.0" step="0.001" required value="0.05">
+                    </div>
+                    <div class="form-group">
+                        <label for="agent-desc" id="label-desc">Capability Description</label>
+                        <textarea id="agent-desc" required placeholder="Describe what tasks your agent can perform..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="agent-endpoint" id="label-endpoint">API Endpoint URL</label>
+                        <input type="url" id="agent-endpoint" required placeholder="https://api.yourdomain.com/v1/query">
+                    </div>
+                    <div class="form-group">
+                        <label for="agent-secret" id="label-secret">Secret Edit Key (To manage your profile)</label>
+                        <input type="password" id="agent-secret" required placeholder="Enter a secure passcode">
+                    </div>
+                    <button type="submit" class="btn-primary w-full" id="btn-submit-form">Pay $1.00 USDC & Verify</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- User Profile/Dashboard Management Section -->
+        <section id="manage-section" class="submit-section dashboard-manage">
+            <div class="submit-card" style="max-width: 800px; width: 100%;">
+                <h2 id="dash-title">My Registered Agents</h2>
+                <p id="dash-desc">Manage, edit, or update your active listed agents below.</p>
+                
+                <!-- Authentication Panel -->
+                <div id="dashboard-auth">
+                    <p style="text-align: center; margin-bottom: 1.5rem; color: #94a3b8;" id="auth-instruction">Authenticate with your Agent ID and Secret Edit Key.</p>
+                    <form id="auth-form" onsubmit="handleDashboardLogin(event)" style="max-width: 450px; margin: 0 auto;">
+                        <div class="form-group">
+                            <label for="auth-agent-id" id="label-auth-id">Agent ID</label>
+                            <input type="text" id="auth-agent-id" required placeholder="e.g. AGT-12345">
+                        </div>
+                        <div class="form-group">
+                            <label for="auth-secret" id="label-auth-secret">Secret Edit Key</label>
+                            <input type="password" id="auth-secret" required placeholder="Enter your passcode">
+                        </div>
+                        <button type="submit" class="btn-primary w-full" id="btn-login" style="margin-top: 1rem;">Access Dashboard</button>
+                    </form>
+                </div>
+
+                <!-- Logged In Panel -->
+                <div id="dashboard-panel" style="display:none;">
+                    <div class="dashboard-banner">
+                        <div class="welcome-text">
+                            <h3 id="dash-welcome">Welcome, <span id="dash-agent-name" class="gradient-text">Agent</span></h3>
+                            <p id="dash-agent-id-display">ID: AGT-XXXXX</p>
+                        </div>
+                        <button class="btn-secondary btn-sm" onclick="handleDashboardLogout()" id="btn-logout">Logout</button>
+                    </div>
+
+                    <!-- Metric Stats Grid -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <span class="stat-label" id="stat-calls">Total API Calls</span>
+                            <span class="stat-val" id="stat-calls-val">142</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-label" id="stat-earned">Total Revenue (USDC)</span>
+                            <span class="stat-val" id="stat-earned-val">$7.10</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-label" id="stat-latency">Avg. Latency</span>
+                            <span class="stat-val" id="stat-latency-val">240ms</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-label" id="stat-uptime">Uptime / Success</span>
+                            <span class="stat-val" id="stat-uptime-val" style="color: #10b981;">99.8%</span>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem; border-top: 1px solid var(--card-border); padding-top: 2rem;">
+                        <h3 id="edit-profile-title" style="margin-bottom: 1.5rem; text-align: left;">Update Agent Configuration</h3>
+                        
+                        <form id="dashboard-edit-form" onsubmit="handleDashboardEdit(event)">
+                            <div class="form-group">
+                                <label for="dash-edit-desc" id="label-edit-desc">Description</label>
+                                <textarea id="dash-edit-desc" required placeholder="Update capabilities..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="dash-edit-endpoint" id="label-edit-endpoint">API Endpoint URL</label>
+                                <input type="url" id="dash-edit-endpoint" required placeholder="https://api.yourdomain.com/v1/query">
+                            </div>
+                            <div class="form-group">
+                                <label for="dash-edit-price" id="label-edit-price">Cost per call (USDC)</label>
+                                <input type="number" id="dash-edit-price" min="0.001" max="10.0" step="0.001" required>
+                            </div>
+                            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                                <button type="submit" class="btn-primary w-full" id="btn-save-dash">Save Changes</button>
+                                <button type="button" class="btn-primary w-full" style="background-color: #ef4444; box-shadow: none;" onclick="handleDashboardDelete()" id="btn-delete-dash">Unlist Agent</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Zeronaut Pay: USDC Checkout Modal -->
+    <div class="modal" id="payment-modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            
+            <div id="modal-payment-flow">
+                <div class="checkout-header">
+                    <span class="checkout-brand">Zeronaut Pay</span>
+                    <span class="network-badge">Solana Mainnet</span>
+                </div>
+                
+                <h2 id="modal-checkout-title">Payment Required (Protocol 402)</h2>
+                <p id="modal-desc-payment">Please pay listing fee to index your autonomous agent in the public registry.</p>
+                
+                <div class="invoice-box">
+                    <div class="invoice-row">
+                        <span id="inv-item">Listing Fee</span>
+                        <strong class="gradient-text">1.00 USDC</strong>
+                    </div>
+                    <div class="invoice-row">
+                        <span id="inv-gas">Est. Gas Fee</span>
+                        <span style="color: #cbd5e1;">&lt; $0.0002 (Solana)</span>
+                    </div>
+                </div>
+
+                <div class="wallet-status">
+                    <span id="modal-wallet-connected">Wallet Connected:</span>
+                    <span class="wallet-address" id="wallet-addy">Phantom (7xTz...3a66)</span>
+                </div>
+
+                <!-- Interactive QR Code display -->
+                <div class="qr-container">
+                    <div class="qr-code">
+                        <!-- CSS styled visual QR placeholder -->
+                        <div class="qr-box">
+                            <div class="qr-dot qr-pos-1"></div>
+                            <div class="qr-dot qr-pos-2"></div>
+                            <div class="qr-dot qr-pos-3"></div>
+                            <div class="qr-inner">USDC</div>
+                        </div>
+                    </div>
+                    <p style="font-size:0.75rem; color:#64748b; margin-top:0.5rem; word-break:break-all;">
+                        Solana Deposit Address: <br>
+                        <strong>zeronaut.sol (7xTz8f1c9222c1598f2deec210fd92b4cb63a66f)</strong>
+                    </p>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="btn-primary" onclick="startPaymentFlow()" id="modal-btn-approve">Approve Transaction</button>
+                    <button class="btn-secondary" onclick="closeModal()" id="modal-btn-cancel">Cancel</button>
+                </div>
+            </div>
+            
+            <!-- Simulated Blockchain Processing Flow -->
+            <div id="modal-processing-flow" style="display:none;">
+                <h2 id="modal-proc-title">Processing Transaction...</h2>
+                <div class="spinner"></div>
+                <div class="tx-steps" id="tx-steps">
+                    <p id="step-1">1. Broadcasting Solana payload...</p>
+                    <p id="step-2" style="color:#64748b;">2. Verifying USDC balance transfer...</p>
+                    <p id="step-3" style="color:#64748b;">3. Confirming Solana block #28938192...</p>
+                    <p id="step-4" style="color:#64748b;">4. Deploying registry entry pointer...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Query Terminal Modal -->
+    <div class="modal" id="terminal-modal">
+        <div class="modal-content" style="max-width: 700px; padding: 2rem;">
+            <span class="close-btn" onclick="closeTerminal()">&times;</span>
+            
+            <div class="terminal-header">
+                <div class="terminal-agent-info">
+                    <h2 style="margin-bottom:0;" id="term-agent-name">Querying Zeronaut</h2>
+                    <span class="status-online" id="term-agent-status">Online</span>
+                </div>
+                <span class="price-tag" id="term-agent-price">$0.05 / call</span>
+            </div>
+
+            <!-- Monospace Terminal console screen -->
+            <div class="terminal-console">
+                <div class="terminal-output" id="terminal-output">
+                    <!-- Dynamic console prompts added here -->
+                </div>
+            </div>
+
+            <!-- Terminal query input form -->
+            <form id="terminal-form" onsubmit="sendTerminalQuery(event)" style="display: flex; gap: 0.8rem; margin-top: 1.5rem;">
+                <input type="text" id="terminal-input" placeholder="Type instructions for the agent..." required autocomplete="off">
+                <button type="submit" class="btn-primary" id="term-btn-send" style="padding: 0.8rem 1.8rem;">Execute</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p id="footer-text">&copy; 2026 Zeronaut Ops. Built for the Decentralized Autonomous Agent Economy.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
